@@ -1,0 +1,43 @@
+<application>
+  <component name="RecentProjectsManager">
+    <option name="recentPaths">
+      <list>
+        <option value="$USER_HOME$/Desktop/Nexpa" />
+        <option value="$USER_HOME$/Desktop/Test" />
+      </list>
+    </option>
+    <option name="openPaths">
+      <list>
+        <option value="$USER_HOME$/Desktop/Nexpa" />
+      </list>
+    </option>
+    <option name="lastPath" value="$USER_HOME$/Desktop/Nexpa" />
+    <option name="additionalInfo">
+      <map>
+        <entry key="$USER_HOME$/Desktop/Nexpa">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="AI-143.2821654" />
+              <option name="productionCode" value="AI" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1463610035533" />
+              <option name="buildTimestamp" value="1461772800000" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/Desktop/Test">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="AI-143.2821654" />
+              <option name="productionCode" value="AI" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1463541586544" />
+              <option name="buildTimestamp" value="1461772800000" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="lastProjectLocation" value="$USER_HOME$/Desktop" />
+  </component>
+</application>
