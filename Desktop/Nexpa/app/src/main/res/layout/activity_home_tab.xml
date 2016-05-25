@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context="com.lpoezy.nexpa.HomeTabActivity">
 
-    <include android:id="@+id/app_bar" layout="@layout/app_bar"></include>
+
 
 
 
@@ -21,12 +21,14 @@
     </android.support.v4.view.ViewPager>
 
 
-
-    <com.lpoezy.nexpa.tabs.SlidingTabLayout
-        android:id="@+id/tabs"
+    <it.neokree.materialtabs.MaterialTabHost
+        android:id="@+id/materialTabHost"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="48dp"
+        app:iconColor="#FFFFFF"
+        app:primaryColor="@color/colorPrimary"
+        app:accentColor="@color/colorAccent"
+        app:hasIcons="true"/>
 
-    </com.lpoezy.nexpa.tabs.SlidingTabLayout>
 
 </LinearLayout>

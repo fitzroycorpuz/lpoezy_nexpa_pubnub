@@ -6,11 +6,6 @@
         <option value="$USER_HOME$/Desktop/Test" />
       </list>
     </option>
-    <option name="openPaths">
-      <list>
-        <option value="$USER_HOME$/Desktop/Nexpa" />
-      </list>
-    </option>
     <option name="lastPath" value="$USER_HOME$/Desktop/Nexpa" />
     <option name="additionalInfo">
       <map>
@@ -20,7 +15,7 @@
               <option name="build" value="AI-143.2821654" />
               <option name="productionCode" value="AI" />
               <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
-              <option name="projectOpenTimestamp" value="1463610035533" />
+              <option name="projectOpenTimestamp" value="1464134953352" />
               <option name="buildTimestamp" value="1461772800000" />
             </RecentProjectMetaInfo>
           </value>

@@ -6,4 +6,11 @@
     <color name="windowBackground">#FFFFFF</color>
     <color name="navigationBarColor">#000000</color>
     <color name="colorAccent">#c8e8ff</color>
+
+    <color name="niagara">#16A085</color>
+    <color name="buttercup">#F39C12</color>
+    <color name="carrara">#F2F1EF</color>
+    
+    <color name="silver">#C0C0C0</color>
+    <color name="fuchsia">#FF00FF</color>
 </resources>

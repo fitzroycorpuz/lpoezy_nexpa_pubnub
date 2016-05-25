@@ -1,0 +1,206 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_weight="1"
+    android:isScrollContainer="false"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/app_bar"
+        layout="@layout/app_bar"></include>
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp" >
+
+                <LinearLayout
+                    android:id="@+id/btn_profile_pic"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <com.github.siyamed.shapeimageview.RoundedImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:id="@+id/img_profile_pic"
+                        app:siRadius="6dp"
+                        app:siBorderWidth="2dp"
+                        android:src="@mipmap/ic_launcher"
+                        app:siBorderColor="@color/silver"
+                        app:siSquare="true"/>
+
+
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="16dp"
+                            android:text="PHOTO"
+                            android:textAllCaps="true"
+
+                            android:textSize="18dp" />
+                    </FrameLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp" >
+
+                <EditText
+                    android:id="@+id/edtName"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+
+                    android:hint="Username"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                     />
+
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp" >
+
+                <EditText
+                    android:id="@+id/edt_short_description"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Description"
+                    android:maxLength="150"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                     />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp" >
+
+                <EditText
+                    android:id="@+id/edt_fb"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+
+                    android:hint="Facebook"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:inputType="textEmailAddress"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp" >
+
+                <EditText
+                    android:id="@+id/edt_url1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+
+                    android:hint="Twitter"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:inputType="textEmailAddress"
+                     />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp" >
+
+                <EditText
+                    android:id="@+id/edt_instagram"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+
+                    android:hint="Instagram"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:inputType="textEmailAddress"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="10dp" >
+
+                <EditText
+                    android:id="@+id/edt_url2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+
+                    android:hint="URL"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:inputType="textEmailAddress"
+                     />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Done"
+        android:id="@+id/btn_done" />
+
+</LinearLayout>

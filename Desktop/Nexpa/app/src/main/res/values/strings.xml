@@ -12,4 +12,13 @@
         <item>TAB 4</item>
         <item>TAB 5</item>
     </string-array>
+
+    <string-array name="settings">
+        <item>Invite Friends</item>
+        <item>Change Password</item>
+        <item>Blocked Users</item>
+        <item>Terms &amp; Conditions</item>
+        <item>Privacy</item>
+        <item>Log Out</item>
+    </string-array>
 </resources>

@@ -8,7 +8,9 @@
         <option name="tabIndex" value="0" />
         <option name="window" value="0" />
       </ViewImpl>
-      <TabImpl />
+      <TabImpl>
+        <option name="bottomProportion" value="0.0" />
+      </TabImpl>
       <General />
     </runner>
     <runner id="Android">
