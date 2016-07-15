@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="5dp">
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp"
+    >
 
 
     <TextView
@@ -13,8 +15,8 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="Log Out"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:text="Logout"
+        android:textSize="@dimen/standard_text_size" />
 
 
 </LinearLayout>

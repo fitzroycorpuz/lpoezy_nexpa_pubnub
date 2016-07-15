@@ -2,15 +2,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_splash_color"
+
     tools:context="com.lpoezy.nexpa.screens.SplashScreen">
 
-    <!-- TODO: Update blank fragment layout -->
-
-
-    <ImageView
+    <LinearLayout
+        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/nexpa_logo"
-        android:layout_gravity="center"
-        android:src="@mipmap/ic_launcher" />
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:id="@+id/nexpa_logo"
+            android:src="@drawable/ic_nexpa" />
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Nexpa"
+            android:textColor="@color/white"
+            android:layout_gravity="center_horizontal" />
+    </LinearLayout>
+
 </FrameLayout>

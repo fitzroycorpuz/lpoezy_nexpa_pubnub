@@ -3,13 +3,11 @@
     <option name="recentPaths">
       <list>
         <option value="$USER_HOME$/Desktop/Nexpa" />
+        <option value="$USER_HOME$/Desktop/ToDoLite-Android" />
+        <option value="$USER_HOME$/Desktop/pubnub-android-chat" />
+        <option value="$USER_HOME$/Desktop/lpoezy_nexpa_pubnub" />
         <option value="$USER_HOME$/Desktop/Android_Projects/Nexpa" />
         <option value="$USER_HOME$/Desktop/Test" />
-      </list>
-    </option>
-    <option name="openPaths">
-      <list>
-        <option value="$USER_HOME$/Desktop/Nexpa" />
       </list>
     </option>
     <option name="lastPath" value="$USER_HOME$/Desktop/Nexpa" />
@@ -32,7 +30,7 @@
               <option name="build" value="AI-143.2821654" />
               <option name="productionCode" value="AI" />
               <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
-              <option name="projectOpenTimestamp" value="1464137539918" />
+              <option name="projectOpenTimestamp" value="1468562842073" />
               <option name="buildTimestamp" value="1461772800000" />
             </RecentProjectMetaInfo>
           </value>
@@ -48,8 +46,41 @@
             </RecentProjectMetaInfo>
           </value>
         </entry>
+        <entry key="$USER_HOME$/Desktop/ToDoLite-Android">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="AI-143.2821654" />
+              <option name="productionCode" value="AI" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1468558263566" />
+              <option name="buildTimestamp" value="1461772800000" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/Desktop/lpoezy_nexpa_pubnub">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="AI-143.2821654" />
+              <option name="productionCode" value="AI" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1466758147965" />
+              <option name="buildTimestamp" value="1461772800000" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/Desktop/pubnub-android-chat">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="AI-143.2821654" />
+              <option name="productionCode" value="AI" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1467850317988" />
+              <option name="buildTimestamp" value="1461772800000" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
       </map>
     </option>
-    <option name="lastProjectLocation" value="$USER_HOME$/Desktop/Android_Projects" />
+    <option name="lastProjectLocation" value="$USER_HOME$/Desktop" />
   </component>
 </application>

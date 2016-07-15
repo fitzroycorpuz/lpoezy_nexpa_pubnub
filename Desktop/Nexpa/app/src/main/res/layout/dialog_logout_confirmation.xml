@@ -1,0 +1,51 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.lpoezy.nexpa.dialogs.LogoutConfirmationDialog">
+
+    <include
+        android:id="@+id/app_bar"
+        layout="@layout/app_bar_dialog_logout"></include>
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:orientation="horizontal"
+       android:gravity="center"
+       android:layout_height="100dp">
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:textAppearance="?android:attr/textAppearanceMedium"
+           android:textColor="@color/colorPrimary"
+           android:text="Are you sure you want to logout?" />
+
+   </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btn_yes"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="YES"
+            android:textColor="@color/colorPrimary"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btn_no"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="NO"
+            android:textColor="@color/colorPrimary"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

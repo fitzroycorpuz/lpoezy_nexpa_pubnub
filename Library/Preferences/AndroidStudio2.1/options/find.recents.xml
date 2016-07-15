@@ -1,0 +1,19 @@
+<application>
+  <component name="FindRecents">
+    <findStrings>
+      <find>textColor</find>
+      <find>Floating tex</find>
+      <find>SMSViewHolder</find>
+      <find>org.florescu.android.rangeseekbar.RangeSeekBar</find>
+      <find>c92026</find>
+      <find>acacac</find>
+      <find>fafafa</find>
+      <find>gender</find>
+      <find>let others</find>
+      <find>09acb5</find>
+      <find>545454</find>
+      <find>mAuthTask</find>
+      <find>startSyncWithBasicAuth</find>
+    </findStrings>
+  </component>
+</application>

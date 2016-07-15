@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lpoezy.nexpa.R;
@@ -15,6 +16,7 @@ import com.lpoezy.nexpa.R;
 
 public class EditProfileScreen extends Fragment {
 
+    public static final String TAG = SigninScreen.class.getSimpleName();
     private Toolbar mToolbar;
 
     public EditProfileScreen() {
@@ -50,6 +52,18 @@ public class EditProfileScreen extends Fragment {
         ab.setDisplayShowTitleEnabled(false);
 
         ((TextView)mToolbar.findViewById(R.id.tab_title)).setText("Edit Profile");
+
+        ((ImageView) mToolbar.findViewById(R.id.ic_header_logo)).setVisibility(View.GONE);
+
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().finish();
+            }
+        });
 
         return v;
     }

@@ -13,16 +13,23 @@ import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.RelativeLayout;
 
+import com.lpoezy.nexpa.screens.BroadcastsScreen;
 import com.lpoezy.nexpa.screens.EditProfileScreen;
 import com.lpoezy.nexpa.screens.ForgotPasswordScreen;
 import com.lpoezy.nexpa.screens.HomeScreen;
+import com.lpoezy.nexpa.screens.NearMeScreen;
 import com.lpoezy.nexpa.screens.NotificationsScreen;
+import com.lpoezy.nexpa.screens.ProfileScreen;
 import com.lpoezy.nexpa.screens.SearchCriteriaScreen;
 import com.lpoezy.nexpa.screens.SettingsScreen;
 import com.lpoezy.nexpa.screens.SigninScreen;
 import com.lpoezy.nexpa.screens.SignupScreen;
 import com.lpoezy.nexpa.tabs.SlidingTabLayout;
+import com.lpoezy.nexpa.views.TabsViewPager;
 
 import java.util.ArrayList;
 
@@ -35,7 +42,7 @@ public class HomeTabActivity extends ActionBarActivity implements MaterialTabLis
 
 
     private Toolbar mToolbar;
-    private ViewPager mPager;
+    private TabsViewPager mPager;
     private SlidingTabLayout mTabs;
     private ArrayList<Fragment> mTabFragments;
     private MaterialTabHost tabHost;
@@ -50,15 +57,15 @@ public class HomeTabActivity extends ActionBarActivity implements MaterialTabLis
 
         mTabFragments = new ArrayList<Fragment>();
         mTabFragments.add(HomeScreen.newInstance());
+        mTabFragments.add(NearMeScreen.newInstance());
+        mTabFragments.add(BroadcastsScreen.newInstance());
         mTabFragments.add(NotificationsScreen.newInstance());
-        mTabFragments.add(SettingsScreen.newInstance());
-        mTabFragments.add(EditProfileScreen.newInstance());
-        mTabFragments.add(SearchCriteriaScreen.newInstance());
+        mTabFragments.add(ProfileScreen.newInstance());
 
         tabHost = (MaterialTabHost) this.findViewById(R.id.materialTabHost);
 
-        mPager = (ViewPager)this.findViewById(R.id.pager);
-
+        mPager = (TabsViewPager)this.findViewById(R.id.pager);
+        mPager.setPagingEnabled(false);
         // insert all tabs from pagerAdapter data
         MyPagerAdapter pagerAdapter = new MyPagerAdapter(getSupportFragmentManager());
 
@@ -69,8 +76,9 @@ public class HomeTabActivity extends ActionBarActivity implements MaterialTabLis
         mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-                // when user do a swipe the selected tab change
+
                 tabHost.setSelectedNavigationItem(position);
+
             }
         });
 
@@ -83,8 +91,12 @@ public class HomeTabActivity extends ActionBarActivity implements MaterialTabLis
             );
         }
 
+        RelativeLayout dummyView = (RelativeLayout) findViewById(R.id.dummyView);
+
+
+
     }
-    int[] icons = new  int[]{R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher};
+    int[] icons = new  int[]{R.drawable.ic_home_tab, R.drawable.ic_nearme_tab, R.drawable.ic_broadcast_tab, R.drawable.ic_notifications_tab, R.drawable.ic_profile_tab};
     private Drawable getIcon(int position) {
         Drawable drawable = getResources().getDrawable(icons[position]);
         return drawable;
@@ -115,7 +127,7 @@ public class HomeTabActivity extends ActionBarActivity implements MaterialTabLis
         public MyPagerAdapter(FragmentManager fm) {
             super(fm);
             tabs = getResources().getStringArray(R.array.tabs);
-            icons = new  int[]{R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher};
+            //icons = new  int[]{R.drawable.ic_launcher, R.drawable.ic_launcher, R.drawable.ic_launcher, R.drawable.ic_launcher, R.drawable.ic_launcher};
         }
 
         @Override

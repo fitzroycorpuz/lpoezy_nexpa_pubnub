@@ -1,17 +1,21 @@
 package com.lpoezy.nexpa.screens;
 
 
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.lpoezy.nexpa.HomeTabActivity;
+import com.lpoezy.nexpa.MainActivity;
 import com.lpoezy.nexpa.R;
+import com.lpoezy.nexpa.utils.AccountManager;
+import com.lpoezy.nexpa.utils.L;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,7 +25,7 @@ import com.lpoezy.nexpa.R;
 public class SplashScreen extends Fragment {
 
 
-    public static final  java.lang.String TAG = SplashScreen.class.getSimpleName();
+    public static final java.lang.String TAG = SplashScreen.class.getSimpleName();
 
     public SplashScreen() {
         // Required empty public constructor
@@ -63,15 +67,40 @@ public class SplashScreen extends Fragment {
             @Override
             public void run() {
 
-                try {
-                    Thread.sleep(3000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+
+
+
+                AccountManager am = new AccountManager(getActivity());
+
+                try{
+
+                    boolean isUserLoggedin = am.isLoggedin();
+
+                    if (isUserLoggedin) {
+
+                        Intent act = new Intent(getActivity(), HomeTabActivity.class);
+                        startActivity(act);
+                        getActivity().finish();
+
+                    } else {
+
+                        try {
+                            Thread.sleep(1500);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        Intent act = new Intent(getActivity(), MainActivity.class);
+                        startActivity(act);
+                        getActivity().finish();
+
+                    }
+
+                }catch (NullPointerException e){
+
                 }
 
-                Intent act = new Intent(getActivity(), HomeTabActivity.class);
-                startActivity(act);
-                getActivity().finish();
+
 
             }
         }).start();

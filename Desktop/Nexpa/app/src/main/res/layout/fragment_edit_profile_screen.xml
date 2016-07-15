@@ -43,7 +43,7 @@
                         android:id="@+id/img_profile_pic"
                         app:siRadius="6dp"
                         app:siBorderWidth="2dp"
-                        android:src="@mipmap/ic_launcher"
+                        android:src="@drawable/ic_avatar"
                         app:siBorderColor="@color/silver"
                         app:siSquare="true"/>
 

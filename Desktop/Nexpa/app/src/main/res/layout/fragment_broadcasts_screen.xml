@@ -1,0 +1,409 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:rsb="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.lpoezy.nexpa.screens.BroadcastsScreen">
+
+    <include
+        android:id="@+id/app_bar"
+        layout="@layout/app_bar"></include>
+
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:background="@color/bg_signup_color" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <com.github.siyamed.shapeimageview.CircularImageView
+                android:id="@+id/img_profile_pic"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:src="@drawable/ic_avatar"
+                app:siBorderColor="@color/silver"
+                app:siBorderWidth="3dp" />
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_weight="1">
+
+
+                <EditText
+                    android:id="@+id/et_broadcast_msg"
+                    android:layout_width="250dp"
+                    android:layout_height="105dp"
+                    android:textColor="@color/gray_02"
+                    android:layout_gravity="center_horizontal|top"
+                    android:padding="5dp"
+                    android:background="@drawable/et_broadcast"
+                    android:ems="10"
+                    android:gravity="top|left"
+                    android:hint="What would you like to say?"
+                    android:inputType="textMultiLine"
+                    android:textSize="@dimen/standard_text_size" />
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/white_smoke" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/img_upload_photo"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="12dp"
+                    android:src="@drawable/ic_upload_photo" />
+
+                <ImageView
+                    android:id="@+id/img_upload_video"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="12dp"
+                    android:src="@drawable/ic_upload_video" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/green_02"
+                    android:text="Share exact location?"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <RadioButton
+                    android:id="@+id/rd_share_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="12dp"
+                    android:checked="false" />
+
+                <Button
+                    android:padding="16dp"
+                    android:textColor="@color/white"
+                    android:id="@+id/btn_share_broadcast"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/green_02"
+                    android:text="Share" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/white_smoke" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+
+                    <TextView
+                        android:id="@+id/tv_gender"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Gender"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_centerInParent="true"
+                        android:layout_alignParentLeft="true"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+
+
+
+
+
+                    <org.florescu.android.rangeseekbar.RangeSeekBar
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="invisible"
+                        rsb:absoluteMaxValue="50"
+                        rsb:absoluteMinValue="1"
+                        rsb:singleThumb="true"
+                        rsb:textAboveThumbsColor="@android:color/holo_green_light" />
+
+
+
+
+
+                        <RadioGroup
+                            android:layout_marginLeft="16dp"
+                            android:id="@+id/myRadioGroup"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checkedButton="@+id/rg_gender"
+                            android:layout_centerInParent="true"
+                            android:layout_toRightOf="@+id/tv_gender"
+                            android:orientation='horizontal'>
+
+                            <RadioButton
+
+                                android:id="@+id/sound"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/standard_text_size"
+                                android:text="Male" />
+
+
+                            <RadioButton
+
+                                android:id="@+id/vibration"
+
+                                android:layout_width="wrap_content"
+
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/standard_text_size"
+                                android:text="Female" />
+
+
+                            <RadioButton
+
+                                android:id="@+id/silent"
+                                android:textSize="@dimen/standard_text_size"
+                                android:layout_width="wrap_content"
+
+                                android:layout_height="wrap_content"
+
+                                android:text="Everyone" />
+
+
+                        </RadioGroup>
+
+
+
+
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+
+                    <TextView
+                        android:id="@+id/tv_age"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Age"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_centerInParent="true"
+                        android:layout_alignParentLeft="true"
+                        android:textSize="@dimen/standard_text_size" />
+
+
+                    <org.florescu.android.rangeseekbar.RangeSeekBar
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="invisible"
+                        rsb:absoluteMaxValue="50"
+                        rsb:absoluteMinValue="1"
+                        rsb:singleThumb="true"
+                        rsb:textAboveThumbsColor="@android:color/holo_green_light" />
+
+
+
+                        <LinearLayout
+                            android:layout_marginLeft="16dp"
+                            android:layout_centerInParent="true"
+                            android:layout_toRightOf="@+id/tv_age"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_marginLeft="16dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                >
+
+                                <TextView
+                                    android:textColor="@color/gray_33"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="5dp"
+                                    android:textSize="@dimen/standard_text_size"
+                                    android:text="Min" />
+
+                                <com.jaredrummler.materialspinner.MaterialSpinner
+                                    android:id="@+id/spinner_min_age"
+                                    android:layout_width="match_parent"
+                                    app:ms_dropdown_max_height="175dp"
+                                    app:ms_background_color="@color/green_02"
+                                    app:ms_text_color="@color/white"
+                                    app:ms_arrow_tint="@color/white"
+                                    app:ms_dropdown_height="wrap_content"
+                                    android:layout_height="wrap_content"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_marginLeft="16dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                >
+
+                                <TextView
+                                    android:textColor="@color/gray_33"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="5dp"
+                                    android:textSize="@dimen/standard_text_size"
+                                    android:text="Max" />
+
+                                <com.jaredrummler.materialspinner.MaterialSpinner
+                                    android:id="@+id/spinner_max_age"
+                                    android:layout_width="match_parent"
+                                    app:ms_dropdown_max_height="175dp"
+                                    app:ms_background_color="@color/red_02"
+                                    app:ms_text_color="@color/white"
+                                    app:ms_arrow_tint="@color/white"
+                                    app:ms_dropdown_height="wrap_content"
+                                    android:layout_height="wrap_content"/>
+
+                            </LinearLayout>
+
+
+
+                    </LinearLayout>
+
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+                        android:gravity="center|bottom">
+
+                        <TextView
+                            android:textColor="@color/colorPrimary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Distance"
+                            android:textSize="@dimen/standard_text_size"  />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        >
+
+                        <org.florescu.android.rangeseekbar.RangeSeekBar
+                            android:id="@+id/rsb_distance"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            rsb:absoluteMaxValue="50"
+                            rsb:absoluteMinValue="1"
+                            rsb:singleThumb="true"
+                            rsb:textAboveThumbsColor="@android:color/holo_green_light" />
+
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/white_smoke" />
+
+        <RelativeLayout
+            android:background="@color/bg_signup_color"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/img_go_global"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="8dp"
+                    android:src="@drawable/ic_go_global" />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:text="Go Global"
+                    android:textSize="@dimen/standard_text_size" />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

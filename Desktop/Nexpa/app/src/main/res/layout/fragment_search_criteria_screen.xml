@@ -1,26 +1,249 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:rsb="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:orientation="vertical"
     tools:context="com.lpoezy.nexpa.screens.SearchCriteriaScreen">
+
 
     <include
         android:id="@+id/app_bar"
         layout="@layout/app_bar"></include>
 
+
     <LinearLayout
+
+        android:layout_marginTop="25dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
 
+            <TextView
+                android:id="@+id/tv_gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
+                android:text="Gender"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/colorPrimary" />
+
+
+            <org.florescu.android.rangeseekbar.RangeSeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                rsb:absoluteMaxValue="50"
+                rsb:absoluteMinValue="1"
+                rsb:singleThumb="true"
+                rsb:textAboveThumbsColor="@android:color/holo_green_light" />
+
+
+            <RadioGroup
+                android:id="@+id/myRadioGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="16dp"
+                android:layout_toRightOf="@+id/tv_gender"
+                android:checkedButton="@+id/rg_gender"
+                android:orientation='horizontal'>
+
+                <RadioButton
+
+                    android:id="@+id/sound"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Male"
+                    android:textSize="@dimen/standard_text_size" />
+
+
+                <RadioButton
+
+                    android:id="@+id/vibration"
+
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+                    android:text="Female"
+                    android:textSize="@dimen/standard_text_size" />
+
+
+                <RadioButton
+
+                    android:id="@+id/silent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="Everyone"
+
+                    android:textSize="@dimen/standard_text_size" />
+
+
+            </RadioGroup>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/tv_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
+                android:text="Age"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/standard_text_size" />
+
+
+            <org.florescu.android.rangeseekbar.RangeSeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                rsb:absoluteMaxValue="50"
+                rsb:absoluteMinValue="1"
+                rsb:singleThumb="true"
+                rsb:textAboveThumbsColor="@android:color/holo_green_light" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="16dp"
+                android:layout_toRightOf="@+id/tv_age"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:text="Min"
+                        android:textColor="@color/gray_33"
+                        android:textSize="@dimen/standard_text_size" />
+
+                    <com.jaredrummler.materialspinner.MaterialSpinner
+                        android:id="@+id/spinner_min_age"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:ms_arrow_tint="@color/white"
+                        app:ms_background_color="@color/green_02"
+                        app:ms_dropdown_height="wrap_content"
+                        app:ms_dropdown_max_height="175dp"
+                        app:ms_text_color="@color/white" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:text="Max"
+                        android:textColor="@color/gray_33"
+                        android:textSize="@dimen/standard_text_size" />
+
+                    <com.jaredrummler.materialspinner.MaterialSpinner
+                        android:id="@+id/spinner_max_age"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:ms_arrow_tint="@color/white"
+                        app:ms_background_color="@color/red_02"
+                        app:ms_dropdown_height="wrap_content"
+                        app:ms_dropdown_max_height="175dp"
+                        app:ms_text_color="@color/white" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp"
+                    android:gravity="center|bottom">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Distance"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/standard_text_size" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    >
+
+                    <org.florescu.android.rangeseekbar.RangeSeekBar
+                        android:id="@+id/rsb_distance"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        rsb:absoluteMaxValue="50"
+                        rsb:absoluteMinValue="1"
+                        rsb:singleThumb="true"
+                        rsb:textAboveThumbsColor="@android:color/holo_green_light" />
+
+                </LinearLayout>
+            </RelativeLayout>
+
+
+        </LinearLayout>
 
 
     </LinearLayout>
 
 
-
-
-
+    <Button
+        android:id="@+id/btn_done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="GO" />
 </LinearLayout>
+

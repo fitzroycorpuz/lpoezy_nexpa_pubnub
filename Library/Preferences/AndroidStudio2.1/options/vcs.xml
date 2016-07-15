@@ -6,8 +6,24 @@
           <option name="url" value="https://github.com/oli107/material-range-bar.git" />
           <option name="userName" value="" />
         </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="https://github.com/yahoo/android-range-seek-bar.git" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="https://github.com/fitzroycorpuz/lpoezy_nexpa_pubnub.git" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="https://github.com/pubnub/pubnub-android-chat.git" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="https://github.com/couchbaselabs/ToDoLite-Android.git" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
       </list>
     </option>
-    <option name="cloneParentDir" value="$USER_HOME$/Desktop/Nexpa" />
+    <option name="cloneParentDir" value="$USER_HOME$/Desktop/" />
   </component>
 </application>
