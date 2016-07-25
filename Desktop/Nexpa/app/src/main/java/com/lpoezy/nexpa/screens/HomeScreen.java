@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,19 +17,32 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lpoezy.nexpa.ChatHistoryActivity;
+import com.lpoezy.nexpa.HomeTabActivity;
 import com.lpoezy.nexpa.R;
 import com.lpoezy.nexpa.SearchCriteriaActivity;
+import com.lpoezy.nexpa.models.M_Broadcast;
+import com.lpoezy.nexpa.models.M_Broadcasts;
+import com.lpoezy.nexpa.models.OnUpdateScreenListener;
+import com.lpoezy.nexpa.service.MyPubNubService;
 import com.lpoezy.nexpa.utils.DividerItemDecoration;
 import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout;
 import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayoutDirection;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeUtils;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
-public class HomeScreen extends Fragment {
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class HomeScreen extends Fragment implements OnUpdateScreenListener{
 
 
     private Toolbar mToolbar;
     private RecyclerView mRvBroadcasts;
-    private BroadcastsAdapter adapter;
+    private BroadcastsAdapter mAdapter;
     private SwipyRefreshLayout mSwipeRefreshLayout;
 
     public HomeScreen() {
@@ -53,6 +65,8 @@ public class HomeScreen extends Fragment {
         }
     }
 
+    private List<M_Broadcast> mBroadcasts;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -71,9 +85,9 @@ public class HomeScreen extends Fragment {
         mRvBroadcasts.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
 
 
-
-        adapter = new BroadcastsAdapter(getActivity());
-        mRvBroadcasts.setAdapter(adapter);
+        mBroadcasts = new ArrayList<M_Broadcast>();
+        mAdapter = new BroadcastsAdapter(getActivity());
+        mRvBroadcasts.setAdapter(mAdapter);
 
 
         mSwipeRefreshLayout = (SwipyRefreshLayout) v.findViewById(R.id.swipeRefreshLayout);
@@ -108,6 +122,62 @@ public class HomeScreen extends Fragment {
         return v;
     }
 
+    @Override
+    public void onResume() {
+
+        super.onResume();
+
+        onUpdateScreen();
+
+        onProcessReceivedMessage();
+    }
+
+    private void onProcessReceivedMessage() {
+
+        if(((HomeTabActivity)getActivity()).isServiceConnected()){
+            ((HomeTabActivity)getActivity()).getService().addOnPubNubCallbackListener(new MyPubNubService.OnPubNubCallbackListener() {
+                @Override
+                public void onMessageReceived(Object object) {
+                    onUpdateScreen();
+                }
+
+                @Override
+                public void onMessageSent(Object object) {
+
+                }
+
+                @Override
+                public void onMessageSendingFailed() {
+
+                }
+            });
+        }
+
+    }
+
+
+    @Override
+    public void onUpdateScreen() {
+
+        M_Broadcasts broadcasts = new M_Broadcasts(getActivity());
+
+        broadcasts.addOnReadingCompleteListener(new M_Broadcasts.OnReadingCompleteListener() {
+            @Override
+            public void onReadingComplete(int result, List<M_Broadcast> broadcasts) {
+
+                if(result==M_Broadcasts.READING_COMPLETE){
+                    mBroadcasts.clear();
+                    mBroadcasts.addAll(broadcasts);
+                    mAdapter.notifyDataSetChanged();
+                }
+
+            }
+        });
+
+        broadcasts.read();
+
+    }
+
     private class BroadcastsAdapter extends RecyclerView.Adapter<BroadcastsAdapter.ViewHolder> {
 
         private final Context context;
@@ -126,13 +196,21 @@ public class HomeScreen extends Fragment {
         @Override
         public int getItemCount() {
 
-            return 10;
+            return mBroadcasts.size();
         }
 
         @Override
         public void onBindViewHolder(final ViewHolder vh, int position) {
 
+            vh.tvUsername.setText(mBroadcasts.get(position).getFrm());
+            vh.tvBroadcastMsg.setText(mBroadcasts.get(position).getMsg());
 
+            long millis = mBroadcasts.get(position).getTimeStamp() / 10000000;
+            DateTime dt = new DateTime(millis);
+            DateTimeFormatter fmt = DateTimeFormat.forPattern("hh:mma");
+            String str = fmt.print(dt);
+
+            vh.tvDateLocation.setText(str);
 
         }
 
@@ -178,12 +256,4 @@ public class HomeScreen extends Fragment {
 
         }
     }
-
-    class Broadcast {
-        public String body;
-        public Broadcast(){
-
-        }
-    }
-
 }

@@ -9,16 +9,26 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.jaredrummler.materialspinner.MaterialSpinner;
+import com.lpoezy.nexpa.HomeTabActivity;
 import com.lpoezy.nexpa.R;
+import com.lpoezy.nexpa.models.M_Broadcast;
+import com.lpoezy.nexpa.models.OnUpdateScreenListener;
+import com.lpoezy.nexpa.service.MyPubNubService;
+import com.lpoezy.nexpa.utils.AccountManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 
-public class BroadcastsScreen extends Fragment {
+
+public class BroadcastsScreen extends Fragment implements OnUpdateScreenListener {
 
     private Toolbar mToolbar;
 
@@ -41,6 +51,11 @@ public class BroadcastsScreen extends Fragment {
         if (getArguments() != null) {
 
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     @Override
@@ -76,7 +91,57 @@ public class BroadcastsScreen extends Fragment {
                 //Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
             }
         });
+        final EditText etBroadcastMsg = (EditText) v.findViewById(R.id.et_broadcast_msg);
+
+
+
+
+        ((Button)v.findViewById(R.id.btn_share_broadcast)).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+
+                final String broadcastMsg = etBroadcastMsg.getText().toString();
+                HomeTabActivity act = (HomeTabActivity) getActivity();
+                if(act.isServiceConnected()){
+
+                    AccountManager am = new AccountManager(getActivity());
+                    String uname = am.getUserName();
+                    String email = am.getEmail();
+
+                    //save message to couchbase
+                    M_Broadcast broadcast = new M_Broadcast(getActivity(), broadcastMsg, uname, 0,"Tondo Manila", "Y");
+                    String msgId = broadcast.write();
+
+
+                    act.getService().addOnPubNubCallbackListener(new MyPubNubService.OnPubNubCallbackListener() {
+                        @Override
+                        public void onMessageReceived(Object object) {
+
+                        }
+
+                        @Override
+                        public void onMessageSent(Object object) {
+                            //Crouton.showText(getActivity(), "Your message was sent successfully. Thanks.", Style.CONFIRM);
+                            etBroadcastMsg.setText("");
+                        }
+
+                        @Override
+                        public void onMessageSendingFailed() {
+
+                        }
+                    });
+
+                    act.getService().publishTo(email, msgId);
+
+                }
+            }
+        });
+
         return v;
     }
 
+    @Override
+    public void onUpdateScreen() {
+
+    }
 }

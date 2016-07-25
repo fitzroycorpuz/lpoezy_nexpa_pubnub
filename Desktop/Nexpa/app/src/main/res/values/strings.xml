@@ -66,6 +66,10 @@
         Please fill the required fields
     </string>
 
+    <string name="alert_invalid_uname_password">
+        The user name or password is incorrect
+    </string>
+
     <string name="privacy_policy">
 
         Nexpa App Privacy Policy\n\n

@@ -13,9 +13,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lpoezy.nexpa.R;
+import com.lpoezy.nexpa.models.OnUpdateScreenListener;
 
 
-public class ChangePasswordScreen extends Fragment {
+public class ChangePasswordScreen extends Fragment implements OnUpdateScreenListener {
 
     public static final String TAG = ChangePasswordScreen.class.getSimpleName();
     private Toolbar mToolbar;
@@ -71,4 +72,8 @@ public class ChangePasswordScreen extends Fragment {
         return v;
     }
 
+    @Override
+    public void onUpdateScreen() {
+
+    }
 }

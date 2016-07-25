@@ -4,20 +4,19 @@ package com.lpoezy.nexpa.screens;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.lpoezy.nexpa.HomeTabActivity;
 import com.lpoezy.nexpa.R;
-import com.lpoezy.nexpa.utils.AccountManager;
-import com.lpoezy.nexpa.utils.L;
-import com.lpoezy.nexpa.utils.Utils;
-
-import org.w3c.dom.Text;
+import com.lpoezy.nexpa.dialogs.TryAgainDialog;
+import com.lpoezy.nexpa.models.M_SignupScreen;
 
 
 public class SigninScreen extends Fragment {
@@ -45,23 +44,65 @@ public class SigninScreen extends Fragment {
         }
     }
 
+    private void showResultDialog(String msg) {
+
+        FragmentManager fm = getActivity().getSupportFragmentManager();
+        TryAgainDialog dialog = TryAgainDialog.newInstance(msg);
+        //dialog.setCancelable(false);
+        dialog.show(fm, TryAgainDialog.TAG);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = (View)inflater.inflate(R.layout.fragment_signin_screen, container, false);
 
+        final EditText etUname = (EditText)v.findViewById(R.id.et_username);
+        final EditText etPassword = (EditText)v.findViewById(R.id.et_password);
 
         //show user the home screen, when btn login is clicked
         ((Button)v.findViewById(R.id.btn_login)).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
 
-                AccountManager am = new AccountManager(getActivity());
-                am.setLoggedin(true);
+                String uname = etUname.getText().toString();
+                String password = etPassword.getText().toString();
 
-                Intent act = new Intent(getActivity(), HomeTabActivity.class);
-                startActivity(act);
-                getActivity().finish();
+                M_SignupScreen signinScreen = new M_SignupScreen(getActivity());
+
+                signinScreen.onSetRegistrationCompleteLister(new M_SignupScreen.OnRegistrationCompleteLister() {
+                    @Override
+                    public void OnRegistrationComplete(int result) {
+
+                        String msg = "";
+                        switch (result){
+                            case M_SignupScreen.LOGIN_COMPLETE:
+
+                                Intent act = new Intent(getActivity(), HomeTabActivity.class);
+                                getActivity().startActivity(act);
+                                getActivity().finish();
+                                return;
+
+                            case M_SignupScreen.UNAME_PASSWORD_INCORRECT:
+                                msg = getActivity().getResources().getString(R.string.alert_invalid_uname_password);
+                                break;
+
+                            case M_SignupScreen.MISSING_FIELD:
+                                msg = getActivity().getResources().getString(R.string.alert_missing_field);
+                                break;
+
+
+                        }
+
+                        showResultDialog(msg);
+                    }
+
+                });
+
+                signinScreen.login(uname, password);
+
+
+
             }
         });
 

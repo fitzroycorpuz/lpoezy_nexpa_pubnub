@@ -12,9 +12,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.lpoezy.nexpa.R;
+import com.lpoezy.nexpa.models.OnUpdateScreenListener;
 
 
-public class ForgotPasswordScreen extends Fragment {
+public class ForgotPasswordScreen extends Fragment implements OnUpdateScreenListener {
 
 
     private Toolbar mToolbar;
@@ -65,4 +66,8 @@ public class ForgotPasswordScreen extends Fragment {
         return v;
     }
 
+    @Override
+    public void onUpdateScreen() {
+
+    }
 }

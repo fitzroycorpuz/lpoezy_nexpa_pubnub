@@ -16,10 +16,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lpoezy.nexpa.R;
+import com.lpoezy.nexpa.models.OnUpdateScreenListener;
 import com.lpoezy.nexpa.utils.DividerItemDecoration;
 
 
-public class ChatHistoryScreen extends Fragment {
+public class ChatHistoryScreen extends Fragment implements OnUpdateScreenListener {
 
     public static final String TAG = ChatHistoryScreen.class.getSimpleName();
     private Toolbar mToolbar;
@@ -82,6 +83,11 @@ public class ChatHistoryScreen extends Fragment {
         mRvChatHistory.setAdapter(adapter);
 
         return v;
+    }
+
+    @Override
+    public void onUpdateScreen() {
+
     }
 
     private class ChatHistoryAdapter extends RecyclerView.Adapter<ChatHistoryAdapter.ViewHolder> {

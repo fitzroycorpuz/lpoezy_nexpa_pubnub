@@ -18,10 +18,11 @@ import android.widget.TextView;
 
 import com.lpoezy.nexpa.R;
 import com.lpoezy.nexpa.dialogs.LogoutConfirmationDialog;
+import com.lpoezy.nexpa.models.OnUpdateScreenListener;
 import com.lpoezy.nexpa.utils.DividerItemDecoration;
 
 
-public class BlockedUsersScreen extends Fragment {
+public class BlockedUsersScreen extends Fragment implements OnUpdateScreenListener{
 
     public static final String TAG = BlockedUsersScreen.class.getSimpleName();
     private Toolbar mToolbar;
@@ -90,6 +91,12 @@ public class BlockedUsersScreen extends Fragment {
         mRvBlockedUsers.setAdapter(adapter);
 
         return v;
+    }
+
+    @Override
+    public void onUpdateScreen() {
+
+
     }
 
     private class BlockedUsersAdapter extends RecyclerView.Adapter<BlockedUsersAdapter.ViewHolder> {

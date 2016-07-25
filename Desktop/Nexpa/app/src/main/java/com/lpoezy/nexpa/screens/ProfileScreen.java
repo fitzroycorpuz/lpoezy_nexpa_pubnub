@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.lpoezy.nexpa.EditProfileActivity;
 import com.lpoezy.nexpa.HomeTabActivity;
 import com.lpoezy.nexpa.SettingsActivity;
+import com.lpoezy.nexpa.models.OnUpdateScreenListener;
 import com.lpoezy.nexpa.parallaxrecyclerview.ParallaxRecyclerAdapter;
 
 import com.lpoezy.nexpa.R;
@@ -30,7 +31,7 @@ import java.util.ArrayList;
  * Use the {@link ProfileScreen#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ProfileScreen extends Fragment {
+public class ProfileScreen extends Fragment implements OnUpdateScreenListener {
 
     private Toolbar mToolbar;
     private RecyclerView mRvBroadcasts;
@@ -132,6 +133,11 @@ public class ProfileScreen extends Fragment {
         });
 
         return v;
+    }
+
+    @Override
+    public void onUpdateScreen() {
+
     }
 
     private class MyBroadcast{}

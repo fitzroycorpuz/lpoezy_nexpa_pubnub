@@ -1,6 +1,5 @@
 package com.lpoezy.nexpa.models;
 
-import android.app.Activity;
 import android.content.Context;
 
 import com.couchbase.lite.CouchbaseLiteException;
@@ -13,6 +12,7 @@ import com.couchbase.lite.Query;
 import com.couchbase.lite.QueryEnumerator;
 import com.couchbase.lite.QueryRow;
 import com.couchbase.lite.View;
+import com.lpoezy.nexpa.utils.AccountManager;
 import com.lpoezy.nexpa.utils.CBLConnectionManager;
 import com.lpoezy.nexpa.utils.L;
 import com.lpoezy.nexpa.utils.Utils;
@@ -37,8 +37,11 @@ public class M_SignupScreen {
 
     //users count
     private static final String USERS_COUNT = "count";
-    private static final String EMAIL_VIEW_VR = "3";
+    private static final String EMAILS_VIEW_VR = "3";
     private static final String UNAME_VIEW_VR = "1";
+    private static final String UNAME_PASS_VIEW_VR = "2";
+    private static final String EMAIL_VIEW_VR = "1";
+    private static final String TEST_UNAME_PASSWORD_VIEW_VR = "1";
 
 
     private final Context context;
@@ -48,6 +51,7 @@ public class M_SignupScreen {
     }
 
     private List<OnRegistrationCompleteLister> onRegistrationCompleteListers = new ArrayList<OnRegistrationCompleteLister>();
+
 
     public void onRemoveRegistrationCompleteLister(OnRegistrationCompleteLister listener) {
         int index = onRegistrationCompleteListers.indexOf(listener);
@@ -70,7 +74,7 @@ public class M_SignupScreen {
         }
     }
 
-    public void register(final String email, final String username, final String password) {
+    public void login(String uname, String password) {
 
         // Create a new document and add data
         CBLConnectionManager connManager = CBLConnectionManager.getInstance().Create(this.context);
@@ -84,6 +88,45 @@ public class M_SignupScreen {
             L.error(e.getMessage());
         }
 
+        if(isThereMissingField("email", uname, password)){
+            notifyOnRegistrationCompleteListener(Results.MISSING_FILED);
+            return;
+        }
+
+
+        if(isUsernameAndPasswordValid(database, uname, password)){
+
+            String email = getRegisteredEmailOf(database, uname);
+
+            AccountManager am = new AccountManager(this.context);
+            am.setLoggedin(true);
+            am.setUsername(uname);
+            am.setEmail(email);
+
+            L.debug("uname: "+uname+", email: "+email);
+
+            notifyOnRegistrationCompleteListener(Results.LOGIN_COMPLETE);
+
+        }else{
+            notifyOnRegistrationCompleteListener(Results.UNAME_PASSWORD_INCORRECT);
+        }
+
+
+    }
+
+    public void register(final String email, final String username, final String password) {
+
+        // Create a new document and add data
+        CBLConnectionManager connManager = CBLConnectionManager.getInstance().Create(this.context);
+        Manager manager = null;
+        Database database = null;
+
+        try {
+            manager = connManager.getManagerInstance();
+            database = connManager.getDatabaseInstance(CBLConnectionManager.DB_NAME);
+        } catch (Exception e) {
+            L.error(e.getMessage());
+        }
 
         //check user input
         boolean isEmailValid = Utils.isValidEmail(email);
@@ -193,6 +236,12 @@ public class M_SignupScreen {
 
         }
 
+
+        AccountManager am = new AccountManager(this.context);
+        am.setLoggedin(true);
+        am.setUsername(username);
+        am.setEmail(email);
+
         notifyOnRegistrationCompleteListener(Results.REGISTRATION_COMPLETE);
     }
 
@@ -221,17 +270,102 @@ public class M_SignupScreen {
         }
     }
 
+    private boolean isUsernameAndPasswordValid(Database database, String uname, String password) {
+        boolean isUnameAndPasswordValid = false;
+        View unameAndPasswordView = database.getView("usernames_passwords");
+
+        unameAndPasswordView.setMap(new Mapper() {
+
+            @Override
+            public void map(Map<String, Object> document, Emitter emitter) {
+
+                String type = String.valueOf(document.get("type"));
+
+                if ("user".equals(type)) {
+                    emitter.emit(document.get("username"), document.get("password"));
+                }
+
+            }
+        }, UNAME_PASS_VIEW_VR);
+
+
+        Query query = unameAndPasswordView.createQuery();
+        // we don't need the reduce here
+        query.setMapOnly(true);
+        QueryEnumerator qResult = null;
+        try {
+            qResult = query.run();
+        } catch (CouchbaseLiteException e) {
+            e.printStackTrace();
+        }
+        for (Iterator<QueryRow> it = qResult; it.hasNext(); ) {
+            QueryRow row = it.next();
+            String unameVal = (String) row.getKey();
+            String passwordVal = (String) row.getValue();
+            L.debug("passwordVal: " + passwordVal+", "+password);
+            if (unameVal.equals(uname) && passwordVal.equals(password)) {
+                isUnameAndPasswordValid = true;
+                break;
+            }
+        }
+
+        return isUnameAndPasswordValid;
+    }
+
     private boolean isThereMissingField(String email, String username, String password) {
 
         return ((email!=null && !email.isEmpty()) && (username!=null && !username.isEmpty()) && (password!=null && !password.isEmpty()))?false:true;
     }
 
+    private String getRegisteredEmailOf(final Database database, final String uname) {
+
+        String email = "";
+
+        View emailView = database.getView("email");
+
+        emailView.setMap(new Mapper() {
+
+            @Override
+            public void map(Map<String, Object> document, Emitter emitter) {
+
+                String type = String.valueOf(document.get("type"));
+
+                if ("user".equals(type)) {
+                    emitter.emit(document.get("username"), document.get("email"));
+                }
+
+            }
+        }, EMAIL_VIEW_VR);
+
+
+        Query query = emailView.createQuery();
+        // we don't need the reduce here
+        query.setMapOnly(true);
+        QueryEnumerator qResult = null;
+        try {
+            qResult = query.run();
+        } catch (CouchbaseLiteException e) {
+            e.printStackTrace();
+        }
+        for (Iterator<QueryRow> it = qResult; it.hasNext(); ) {
+            QueryRow row = it.next();
+            String key = (String) row.getKey();
+
+            if (key.equals(uname)) {
+                email = String.valueOf(row.getValue());
+                break;
+            }
+        }
+
+        return email;
+    }
+
     private boolean isEmailAlreadyExists(Database database, String email) {
 
         boolean isAlreadyExists = false;
-        View emailView = database.getView("emails");
+        View emailsView = database.getView("emails");
 
-        emailView.setMap(new Mapper() {
+        emailsView.setMap(new Mapper() {
 
             @Override
             public void map(Map<String, Object> document, Emitter emitter) {
@@ -243,10 +377,10 @@ public class M_SignupScreen {
                 }
 
             }
-        }, EMAIL_VIEW_VR);
+        }, EMAILS_VIEW_VR);
 
 
-        Query query = emailView.createQuery();
+        Query query = emailsView.createQuery();
         // we don't need the reduce here
         query.setMapOnly(true);
         QueryEnumerator qResult = null;
@@ -300,9 +434,9 @@ public class M_SignupScreen {
         }
         for (Iterator<QueryRow> it = qResult; it.hasNext(); ) {
             QueryRow row = it.next();
-            String emailVal = (String) row.getKey();
+            String unameVal = (String) row.getKey();
             //L.debug("email: " + emailVal);
-            if (emailVal.equals(uname)) {
+            if (unameVal.equals(uname)) {
                 isAlreadyExists = true;
                 L.error("username already exists");
                 break;
@@ -315,8 +449,6 @@ public class M_SignupScreen {
 
     public interface OnRegistrationCompleteLister {
         public void OnRegistrationComplete(int result);
-
-        public void OnLoginComplete(int result);
     }
 
 }

@@ -18,9 +18,10 @@ import android.widget.TextView;
 
 import com.lpoezy.nexpa.R;
 import com.lpoezy.nexpa.SearchCriteriaActivity;
+import com.lpoezy.nexpa.models.OnUpdateScreenListener;
 
 
-public class NearMeScreen extends Fragment {
+public class NearMeScreen extends Fragment implements OnUpdateScreenListener {
 
     private Toolbar mToolbar;
     private NearMeAdapter mAdapter;
@@ -79,6 +80,11 @@ public class NearMeScreen extends Fragment {
         });
 
         return v;
+    }
+
+    @Override
+    public void onUpdateScreen() {
+
     }
 
     private class NearMeAdapter extends BaseAdapter{

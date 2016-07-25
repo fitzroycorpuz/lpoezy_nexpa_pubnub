@@ -136,12 +136,6 @@ public class SignupScreen extends Fragment {
                         showResultDialog(msg);
                     }
 
-                    @Override
-                    public void OnLoginComplete(int result) {
-
-                    }
-
-
                 });
 
                 am.register(email, username, password);

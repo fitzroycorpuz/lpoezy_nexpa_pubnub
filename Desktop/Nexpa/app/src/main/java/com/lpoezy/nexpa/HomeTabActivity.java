@@ -1,8 +1,12 @@
 package com.lpoezy.nexpa;
 
 import android.app.ActionBar;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -17,6 +21,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import com.lpoezy.nexpa.models.M_Broadcast;
+import com.lpoezy.nexpa.models.M_Broadcasts;
+import com.lpoezy.nexpa.models.OnUpdateScreenListener;
 import com.lpoezy.nexpa.screens.BroadcastsScreen;
 import com.lpoezy.nexpa.screens.EditProfileScreen;
 import com.lpoezy.nexpa.screens.ForgotPasswordScreen;
@@ -28,11 +35,15 @@ import com.lpoezy.nexpa.screens.SearchCriteriaScreen;
 import com.lpoezy.nexpa.screens.SettingsScreen;
 import com.lpoezy.nexpa.screens.SigninScreen;
 import com.lpoezy.nexpa.screens.SignupScreen;
+import com.lpoezy.nexpa.service.MyPubNubService;
 import com.lpoezy.nexpa.tabs.SlidingTabLayout;
+import com.lpoezy.nexpa.utils.AccountManager;
+import com.lpoezy.nexpa.utils.L;
 import com.lpoezy.nexpa.views.TabsViewPager;
 
 import java.util.ArrayList;
 
+import de.keyboardsurfer.android.widget.crouton.Crouton;
 import it.neokree.materialtabs.MaterialTab;
 import it.neokree.materialtabs.MaterialTabHost;
 import it.neokree.materialtabs.MaterialTabListener;
@@ -96,6 +107,71 @@ public class HomeTabActivity extends ActionBarActivity implements MaterialTabLis
 
 
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        Crouton.cancelAllCroutons();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        unbindService(mServiceConn);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Intent service = new Intent(HomeTabActivity.this, MyPubNubService.class);
+
+        startService(service);
+        bindService(service, mServiceConn, BIND_AUTO_CREATE);
+    }
+
+    private boolean isServiceConnected;
+    private MyPubNubService mService;
+
+    public boolean isServiceConnected() {
+        return isServiceConnected;
+    }
+
+    public MyPubNubService getService() {
+        return mService;
+    }
+
+    private ServiceConnection mServiceConn = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder service) {
+
+            isServiceConnected = true;
+
+            MyPubNubService.LocalBinder binder = (MyPubNubService.LocalBinder) service;
+            mService = binder.getService();
+
+            AccountManager am = new AccountManager(HomeTabActivity.this);
+            String uname = am.getUserName();
+            String email = am.getEmail();
+
+            //save message to couchbase
+//            M_Broadcast broadcast = new M_Broadcast(getApplicationContext(), "hello world!!!", uname, 0,"Tondo Manila", "Y");
+//            String msgId = broadcast.write();
+//            mService.publishTo(email, msgId);
+
+
+
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName componentName) {
+            isServiceConnected = false;
+            mService = null;
+        }
+    };
+
     int[] icons = new  int[]{R.drawable.ic_home_tab, R.drawable.ic_nearme_tab, R.drawable.ic_broadcast_tab, R.drawable.ic_notifications_tab, R.drawable.ic_profile_tab};
     private Drawable getIcon(int position) {
         Drawable drawable = getResources().getDrawable(icons[position]);
@@ -104,6 +180,8 @@ public class HomeTabActivity extends ActionBarActivity implements MaterialTabLis
 
     @Override
     public void onTabSelected(MaterialTab tab) {
+
+        ((OnUpdateScreenListener)mTabFragments.get(tab.getPosition())).onUpdateScreen();
 
         // when the tab is clicked the pager swipe content to the tab position
         mPager.setCurrentItem(tab.getPosition());
